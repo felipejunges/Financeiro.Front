@@ -2,8 +2,6 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-
-
 .main-head{
     height: 150px;
     background: #FFF;
@@ -12,11 +10,12 @@ body {
 
 .sidenav {
     height: 100%;
-    background-color: #000;
+    /* background-color: #000; */
+    background-image: url('../../../assets/fundo_login.jpg');
+    background-size: cover;
     overflow-x: hidden;
     padding-top: 20px;
 }
-
 
 .main {
     padding: 0px 10px;
