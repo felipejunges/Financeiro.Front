@@ -23,18 +23,33 @@ export class MatriculaComponent implements OnInit {
     });
   }
 
-  campoInvalido(campo: string){
+  campoInvalido(campo: string) {
     return this.postagemForm.controls[campo].invalid && (this.postagemForm.controls[campo].dirty || this.postagemForm.controls[campo].touched);
   }
+
+  // get nome() {
+  //   return this.postagemForm.get('nome')!;
+  // }
 
   submit() {
     if (this.postagemForm.invalid)
       return;
 
+    // this.postagemForm.setErrors({
+    //   cpf: 'teste'
+    // });
+
+    this.postagemForm.controls['cpf'].setErrors({'teste': true});
+
     // this.service.incluir({
-    //   titulo: this.title.value,
-    //   descricao: this.description.value
-    // }).subscribe();
+    //   email: '',
+    //   senha: '',
+    //   nome: this.nome.value
+    // }).subscribe({
+    //   next: (v) => console.log(v),
+    //   error: (e) => console.error(e),
+    //   complete: () => console.info('complete')
+    // });
   }
 
 }
