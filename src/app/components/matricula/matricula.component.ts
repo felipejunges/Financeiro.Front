@@ -48,11 +48,6 @@ export class MatriculaComponent implements OnInit {
   //   return this.postagemForm.get('nome')!;
   // }
 
-  teste(e:Event)
-  {
-    console.log(e);
-  }
-
   submit() {
     if (this.postagemForm.invalid)
       return;
