@@ -49,7 +49,7 @@
       </div>
       <div class="col-md-2">
         <label for="cpf" class="form-label">CPF</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('cpf') ? 'is-invalid' : ''" id="cpf" formControlName="cpf" />
+        <input type="text" class="form-control" mask="000.000.000-00" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('cpf') ? 'is-invalid' : ''" id="cpf" formControlName="cpf" />
 
         <div *ngIf="campoInvalido('cpf')" class="invalid-feedback">
           <div *ngIf="postagemForm.controls['cpf'].errors?.['required']">O CPF é obrigatório</div>
@@ -72,7 +72,7 @@
     <div class="row">
       <div class="col-md-2 offset-6">
         <label for="dataNascimento" class="form-label">Data de nascimento</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('dataNascimento') ? 'is-invalid' : ''" id="dataNascimento" formControlName="dataNascimento" />
+        <input type="text" class="form-control" mask="00/00/0000" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('dataNascimento') ? 'is-invalid' : ''" id="dataNascimento" formControlName="dataNascimento" (ngModelChange)="teste($event)" />
 
         <div *ngIf="campoInvalido('dataNascimento')" class="invalid-feedback">
           <div *ngIf="postagemForm.controls['dataNascimento'].errors?.['required']">A data de nascimento é obrigatória</div>
@@ -84,7 +84,7 @@
 
       <div class="col-md-2">
         <label for="telefone" class="form-label">Telefone</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('telefone') ? 'is-invalid' : ''" id="telefone" formControlName="telefone" />
+        <input type="text" class="form-control" mask="(00) 00000-0000" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('telefone') ? 'is-invalid' : ''" id="telefone" formControlName="telefone" />
 
         <div *ngIf="campoInvalido('telefone')" class="invalid-feedback">
           <div *ngIf="postagemForm.controls['telefone'].errors?.['required']">O telefone é obrigatório</div>
@@ -150,7 +150,7 @@
 
       <div class="col-md-2">
         <label for="cep" class="form-label">CEP</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('cep') ? 'is-invalid' : ''" id="cep" formControlName="cep" />
+        <input type="text" class="form-control" mask="00000-000" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('cep') ? 'is-invalid' : ''" id="cep" formControlName="cep" />
 
         <div *ngIf="campoInvalido('cep')" class="invalid-feedback">
           <div *ngIf="postagemForm.controls['cep'].errors?.['required']">O CEP é obrigatório</div>

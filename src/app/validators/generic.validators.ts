@@ -5,8 +5,8 @@ export class GenericValidators {
 
     static isValidCpf() {
         return (control: AbstractControl): Validators => {
-            const cpf = control.value;
-            
+            const cpf = control.value.replace(/\D/g, "");
+
             if (cpf) {
                 let numbers, digits, sum, i, result, equalDigits;
                 equalDigits = 1;

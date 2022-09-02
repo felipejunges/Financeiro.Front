@@ -9,6 +9,10 @@ import { MatriculaComponent } from './components/matricula/matricula.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +25,8 @@ import { LoginComponent } from './components/login/login.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
