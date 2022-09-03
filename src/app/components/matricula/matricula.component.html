@@ -6,22 +6,26 @@
     <legend>Acesso</legend>
     <div class="row">
       <div class="col-md-4">
-        <label for="email" class="form-label">Email</label>
+        <label for="email" class="form-label">E-mail <span class="obrigatorio">*</span></label>
         <div class="input-group">
           <span class="input-group-text" id="basic-addon1">@</span>
           <input type="text" class="form-control" [ngClass]="campoInvalido('email') ? 'is-invalid' : ''" aria-label="E-mail" aria-describedby="basic-addon1" id="email" formControlName="email">
 
           <div *ngIf="campoInvalido('email')" class="invalid-feedback">
-            <div *ngIf="postagemForm.controls['email'].errors?.['required']">O e-mail é obrigatório</div>
-            <div *ngIf="postagemForm.controls['email'].errors?.['email']">
+            <div *ngIf="postagemForm.get('email')!.errors?.['required']">O e-mail é obrigatório</div>
+            <div *ngIf="postagemForm.get('email')!.errors?.['email']">
               O e-mail deve ser informado corretamente
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <label for="senha" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="senha" />
+        <label for="senha" class="form-label">Senha <span class="obrigatorio">*</span></label>
+        <input type="password" class="form-control" [ngClass]="campoInvalido('senha') ? 'is-invalid' : ''" aria-label="Senha" aria-describedby="basic-addon1" id="senha" formControlName="senha" />
+
+        <div *ngIf="campoInvalido('senha')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('senha')!.errors?.['required']">A senha é obrigatória</div>
+        </div>
       </div>
     </div>
     <div class="col-12 mt-2">
@@ -36,59 +40,59 @@
     <legend>Dados cadastrais</legend>
     <div class="row">
       <div class="col-md-6">
-        <label for="nome" class="form-label">Nome</label>
+        <label for="nome" class="form-label">Nome <span class="obrigatorio">*</span></label>
         <input type="text" class="form-control" [ngClass]="campoInvalido('nome') ? 'is-invalid' : ''" id="nome" formControlName="nome" />
 
         <div *ngIf="campoInvalido('nome')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['nome'].errors?.['required']">O nome é obrigatório</div>
-          <div *ngIf="postagemForm.controls['nome'].errors?.['minlength']">
+          <div *ngIf="postagemForm.get('nome')!.errors?.['required']">O nome é obrigatório</div>
+          <div *ngIf="postagemForm.get('nome')!.errors?.['minlength']">
             O tamanho mínimo do campo é de 3 caracteres
           </div>
         </div>
 
       </div>
       <div class="col-md-2">
-        <label for="cpf" class="form-label">CPF</label>
+        <label for="cpf" class="form-label">CPF <span class="obrigatorio">*</span></label>
         <input type="text" class="form-control" mask="000.000.000-00" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('cpf') ? 'is-invalid' : ''" id="cpf" formControlName="cpf" />
 
         <div *ngIf="campoInvalido('cpf')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['cpf'].errors?.['required']">O CPF é obrigatório</div>
-          <div *ngIf="postagemForm.controls['cpf'].errors?.['cpfNotValid']">
+          <div *ngIf="postagemForm.get('cpf')!.errors?.['required']">O CPF é obrigatório</div>
+          <div *ngIf="postagemForm.get('cpf')!.errors?.['cpfNotValid']">
             O CPF deve ser informado corretamente
           </div>
-          <div *ngIf="postagemForm.controls['cpf'].errors?.['teste']">Funcionou!!</div>
+          <div *ngIf="postagemForm.get('cpf')!.errors?.['teste']">Funcionou!!</div>
         </div>
       </div>
 
       <div class="col-md-2">
-        <label for="identidade" class="form-label">Identidade</label>
+        <label for="identidade" class="form-label">Identidade <span class="obrigatorio">*</span></label>
         <input type="text" class="form-control" [ngClass]="campoInvalido('identidade') ? 'is-invalid' : ''" id="identidade" formControlName="identidade" />
 
         <div *ngIf="campoInvalido('identidade')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['identidade'].errors?.['required']">A identidade é obrigatória</div>
+          <div *ngIf="postagemForm.get('identidade')!.errors?.['required']">A identidade é obrigatória</div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-2 offset-6">
-        <label for="dataNascimento" class="form-label">Data de nascimento</label>
-        <input type="text" class="form-control" mask="00/00/0000" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('dataNascimento') ? 'is-invalid' : ''" id="dataNascimento" formControlName="dataNascimento" />
+        <label for="dataNascimento" class="form-label">Data de nascimento <span class="obrigatorio">*</span></label>
+        <input type="date" class="form-control" [ngClass]="campoInvalido('dataNascimento') ? 'is-invalid' : ''" id="dataNascimento" formControlName="dataNascimento" />
 
         <div *ngIf="campoInvalido('dataNascimento')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['dataNascimento'].errors?.['required']">A data de nascimento é obrigatória</div>
-          <div *ngIf="postagemForm.controls['dataNascimento'].errors?.['pattern']">
+          <div *ngIf="postagemForm.get('dataNascimento')!.errors?.['required']">A data de nascimento é obrigatória</div>
+          <div *ngIf="postagemForm.get('dataNascimento')!.errors?.['pattern']">
             A data de nascimento deve ser informada corretamente (dd/mm/aaaa)
           </div>
         </div>
       </div>
 
       <div class="col-md-2">
-        <label for="telefone" class="form-label">Telefone</label>
+        <label for="telefone" class="form-label">Telefone <span class="obrigatorio">*</span></label>
         <input type="text" class="form-control" mask="(00) 00000-0000" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('telefone') ? 'is-invalid' : ''" id="telefone" formControlName="telefone" />
 
         <div *ngIf="campoInvalido('telefone')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['telefone'].errors?.['required']">O telefone é obrigatório</div>
-          <div *ngIf="postagemForm.controls['telefone'].errors?.['pattern']">
+          <div *ngIf="postagemForm.get('telefone')!.errors?.['required']">O telefone é obrigatório</div>
+          <div *ngIf="postagemForm.get('telefone')!.errors?.['pattern']">
             O telefone deve ser informado corretamente (XX) XXXXX-XXXX
           </div>
         </div>
@@ -96,23 +100,46 @@
     </div>
   </fieldset>
 
-  <fieldset class="mt-4">
+  <fieldset class="mt-4" formGroupName="endereco">
     <legend>Endereço principal</legend>
     <div class="row">
       <div class="col-10">
-        <label for="logradouro" class="form-label">Endereço</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('logradouro') ? 'is-invalid' : ''" id="logradouro" formControlName="logradouro" placeholder="Rua Brasil" />
+        <label for="logradouro" class="form-label">Endereço <span class="obrigatorio">*</span></label>
+        <input type="text" class="form-control" [ngClass]="campoGrupoInvalido('endereco', 'logradouro') ? 'is-invalid' : ''" id="logradouro" formControlName="logradouro" placeholder="Rua Brasil" />
 
-        <div *ngIf="campoInvalido('logradouro')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['logradouro'].errors?.['required']">O endereço é obrigatório</div>
+        <div *ngIf="campoGrupoInvalido('endereco', 'logradouro')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('endereco')!.get('logradouro')!.errors?.['required']">O endereço é obrigatório</div>
         </div>
       </div>
       <div class="col-2">
-        <label for="numero" class="form-label">Número</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('numero') ? 'is-invalid' : ''" id="numero" formControlName="numero" placeholder="200" />
+        <label for="numero" class="form-label">Número <span class="obrigatorio">*</span></label>
+        <input type="text" class="form-control" [ngClass]="campoGrupoInvalido('endereco', 'numero') ? 'is-invalid' : ''" id="numero" formControlName="numero" placeholder="200" />
 
-        <div *ngIf="campoInvalido('numero')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['numero'].errors?.['required']">O número do endereço é obrigatório</div>
+        <div *ngIf="campoGrupoInvalido('endereco', 'numero')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('endereco')!.get('numero')!.errors?.['required']">O número do endereço é obrigatório</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <label for="bairro" class="form-label">Bairro <span class="obrigatorio">*</span></label>
+        <input type="text" class="form-control" [ngClass]="campoGrupoInvalido('endereco', 'bairro') ? 'is-invalid' : ''" id="bairro" formControlName="bairro" />
+
+        <div *ngIf="campoGrupoInvalido('endereco', 'bairro')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('endereco')!.get('bairro')!.errors?.['required']">O bairro é obrigatório</div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <label for="cep" class="form-label">CEP <span class="obrigatorio">*</span></label>
+        <input type="text" class="form-control" mask="00000-000" [dropSpecialCharacters]="false" [ngClass]="campoGrupoInvalido('endereco', 'cep') ? 'is-invalid' : ''" id="cep" formControlName="cep" />
+
+        <div *ngIf="campoGrupoInvalido('endereco', 'cep')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('endereco')!.get('cep')!.errors?.['required']">O CEP é obrigatório</div>
+          <div *ngIf="postagemForm.get('endereco')!.get('cep')!.errors?.['pattern']">
+            O CEP deve ser informado corretamente (XXXXX-XXX)
+          </div>
         </div>
       </div>
     </div>
@@ -120,49 +147,79 @@
     <div class="row">
       <div class="col-4">
         <label for="complemento" class="form-label">Complemento</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('complemento') ? 'is-invalid' : ''" id="complemento" formControlName="complemento" placeholder="APTO 202" />
+        <input type="text" class="form-control" [ngClass]="campoGrupoInvalido('endereco', 'complemento') ? 'is-invalid' : ''" id="complemento" formControlName="complemento" placeholder="APTO 202" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <label for="cidade" class="form-label">Cidade</label>
-        <input type="text" class="form-control" [ngClass]="campoInvalido('cidade') ? 'is-invalid' : ''" id="cidade" formControlName="cidade" placeholder="Porto Alegre" />
+        <label for="municipio" class="form-label">Cidade <span class="obrigatorio">*</span></label>
+        <input type="text" class="form-control" [ngClass]="campoGrupoInvalido('endereco', 'municipio') ? 'is-invalid' : ''" id="municipio" formControlName="municipio" placeholder="Porto Alegre" />
 
-        <div *ngIf="campoInvalido('cidade')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['cidade'].errors?.['required']">A cidade é obrigatória</div>
+        <div *ngIf="campoGrupoInvalido('endereco', 'municipio')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('endereco')!.get('municipio')!.errors?.['required']">A cidade é obrigatória</div>
         </div>
       </div>
 
       <div class="col-md-4">
-        <label for="estado" class="form-label">Estado</label>
-        <select id="estado" class="form-select" [ngClass]="campoInvalido('estado') ? 'is-invalid' : ''" id="estado" formControlName="estado">
+        <label for="uf" class="form-label">Estado <span class="obrigatorio">*</span></label>
+        <select id="uf" class="form-select" [ngClass]="campoGrupoInvalido('endereco', 'uf') ? 'is-invalid' : ''" id="uf" formControlName="uf">
           <option value="" disabled>Selecione</option>
           <option *ngFor="let estado of estados" [ngValue]="estado.uf">
             {{ estado.nome }}
           </option>
         </select>
 
-        <div *ngIf="campoInvalido('estado')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['estado'].errors?.['required']">O estado é obrigatório</div>
-        </div>
-      </div>
-
-      <div class="col-md-2">
-        <label for="cep" class="form-label">CEP</label>
-        <input type="text" class="form-control" mask="00000-000" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('cep') ? 'is-invalid' : ''" id="cep" formControlName="cep" />
-
-        <div *ngIf="campoInvalido('cep')" class="invalid-feedback">
-          <div *ngIf="postagemForm.controls['cep'].errors?.['required']">O CEP é obrigatório</div>
-          <div *ngIf="postagemForm.controls['cep'].errors?.['pattern']">
-            O CEP deve ser informado corretamente (XXXXX-XXX)
-          </div>
+        <div *ngIf="campoGrupoInvalido('endereco', 'uf')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('endereco')!.get('uf')!.errors?.['required']">O UF é obrigatório</div>
         </div>
       </div>
     </div>
   </fieldset>
 
-  <div class="row mt-3">
+  <fieldset class="mt-4">
+    <legend>Curso</legend>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="curso" class="form-label">Curso selecionado</label>
+        <input type="text" class="form-control" value="Nutrição" id="curso" readonly />
+        <input type="hidden" formControlName="cursoId" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="mt-4">
+    <legend>Parcelamento</legend>
+
+    <div class="row">
+      <div class="col-md-2">
+        <label for="valorTotal" class="form-label">Valor total</label>
+        <input type="text" class="form-control" value="R$ 5.000,00" id="valorTotal" readonly />
+      </div>
+
+      <div class="col-md-2">
+        <label for="dataPrimeiroVencimento" class="form-label">Primeiro vencimento em</label>
+        <input type="text" class="form-control" id="dataPrimeiroVencimento" value={{primeiroVencimento}} readonly />
+      </div>
+
+      <div class="col-md-2">
+        <label for="numeroParcelas" class="form-label">Parcelamento <span class="obrigatorio">*</span></label>
+        <select id="numeroParcelas" class="form-select" [ngClass]="campoInvalido('numeroParcelas') ? 'is-invalid' : ''" id="numeroParcelas" formControlName="numeroParcelas">
+          <option value="" disabled>Selecione</option>
+          <option *ngFor="let opcao of opcoesParcelamento" [ngValue]="opcao.parcelamento">
+            {{ opcao.descricao }}
+          </option>
+        </select>
+
+        <div *ngIf="campoInvalido('numeroParcelas')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('numeroParcelas')!.errors?.['required']">O número de parcelas é obrigatório</div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="row mt-3 mb-4">
     <div class="col-12">
       <button type="submit" class="btn btn-primary" [disabled]="formDir.pristine || formDir.invalid">Registrar matrícula</button>
     </div>

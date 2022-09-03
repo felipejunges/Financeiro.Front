@@ -1,0 +1,12 @@
+.form-label {
+    margin-bottom: .2rem;
+}
+
+.row {
+    margin-bottom: .5rem;
+}
+
+.obrigatorio {
+    color: #dc3545;
+    font-weight: bold;
+}

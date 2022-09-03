@@ -11,7 +11,7 @@ import { Matricula } from 'src/app/interfaces/Matricula';
 })
 export class MatriculaApiService {
   private baseUrl = environment.apiBaseUrl;
-  private matriculasApiUrl = `${this.baseUrl}api/Contratos`;
+  private matriculasApiUrl = `${this.baseUrl}api/Matriculas`;
 
   constructor(private http: HttpClient) { }
 
