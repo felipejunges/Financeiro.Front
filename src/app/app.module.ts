@@ -9,7 +9,8 @@ import { MatriculaComponent } from './components/matricula/matricula.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ContratoComponent } from './components/contrato/contrato.component'
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
@@ -18,7 +19,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     AppComponent,
     MatriculaComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ContratoComponent
   ],
   imports: [
     BrowserModule,

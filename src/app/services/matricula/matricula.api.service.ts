@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
@@ -11,11 +11,17 @@ import { Matricula } from 'src/app/interfaces/Matricula';
 })
 export class MatriculaApiService {
   private baseUrl = environment.apiBaseUrl;
-  private matriculasApiUrl = `${this.baseUrl}api/Matriculas`;
 
   constructor(private http: HttpClient) { }
 
   incluir(matricula: Matricula): Observable<Matricula> {
-    return this.http.post<Matricula>(this.matriculasApiUrl, matricula);
+    return this.http.post<Matricula>(`${this.baseUrl}api/Matriculas`, matricula);
+  }
+
+  obterContrato(contratoId: number): Observable<any> {
+    //const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    const options = {responseType: 'text'};
+
+    return this.http.get(`${this.baseUrl}api/Contratos/${contratoId}/termos`, {responseType: 'text'});
   }
 }
