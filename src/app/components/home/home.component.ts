@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleApiService, UserInfo } from 'src/app/services/auth/google-api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  userInfo?: UserInfo;
+  nomeUsuario: string = "OIEE";
+
+  constructor(private readonly googleApi: GoogleApiService) {
+    googleApi.userProfileSubject.subscribe( info => {
+      this.userInfo = info;
+      this.nomeUsuario = info.info.name;
+      console.log(info);
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  isLoggedIn(): boolean {
+    return this.googleApi.isLoggedIn()
   }
 
 }

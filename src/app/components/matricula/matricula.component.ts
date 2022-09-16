@@ -58,7 +58,7 @@ export class MatriculaComponent implements OnInit {
   }
 
   calcularPrimeiroVencimento():Date {
-    var currentDate = new Date();
+    let currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
 
     return currentDate;

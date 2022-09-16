@@ -4,10 +4,12 @@ import { ContratoComponent } from './components/contrato/contrato.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatriculaComponent } from './components/matricula/matricula.component';
+import { ParcelasComponent } from './components/parcelas/parcelas.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'parcelas', component: ParcelasComponent },
   { path: 'matricula', component: MatriculaComponent },
   { path: 'contrato/:id', component: ContratoComponent }
 ];
