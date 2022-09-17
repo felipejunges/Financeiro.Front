@@ -1,7 +1,22 @@
-<ul>
-    <li *ngFor="let parcela of parcelas">
-        <div>{{parcela.sequencial}}</div>
-        <div>{{parcela.dataVencimento}}</div>
-        <div>{{parcela.valor}}</div>
-    </li>
-  </ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vencimento</th>
+      <th scope="col" class="text-end">Valor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr *ngFor="let parcela of parcelas">
+      <th scope="row">{{ parcela.sequencial }}</th>
+      <td>{{ parcela.dataVencimento | date: "dd/MM/yyyy" }}</td>
+      <td class="text-end">R$ {{ parcela.valor.toFixed(2) }}</td>
+      <td class="text-end">
+        <a routerLink="/parcelas/{{ parcela.id }}" *ngIf="parcela.temBoleto">
+          <i class="bi bi-printer-fill"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

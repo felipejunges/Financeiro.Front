@@ -1,5 +1,7 @@
 export interface Parcela {
+    id: number,
     sequencial: number,
     valor: number,
-    dataVencimento: Date
+    dataVencimento: Date,
+    temBoleto: boolean
 }

@@ -14,6 +14,7 @@ import { ContratoComponent } from './components/contrato/contrato.component'
 
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { ParcelasComponent } from './components/parcelas/parcelas.component';
+import { ImprimirBoletoComponent } from './components/imprimir-boleto/imprimir-boleto.component';
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
@@ -24,7 +25,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     HomeComponent,
     LoginComponent,
     ContratoComponent,
-    ParcelasComponent
+    ParcelasComponent,
+    ImprimirBoletoComponent
   ],
   imports: [
     BrowserModule,

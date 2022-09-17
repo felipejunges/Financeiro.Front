@@ -19,7 +19,8 @@ export class ParcelasService {
 
   private authHeader() : HttpHeaders {
     return new HttpHeaders ({
-      'Authorization': `Bearer ${this.oAuthService.getAccessToken()}`
+      //'Access-Control-Allow-Origin': 'http://localhost:4200',
+      //'Authorization': `Bearer ${this.oAuthService.getAccessToken()}`
     })
   }
 }
