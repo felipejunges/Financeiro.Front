@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleApiService, UserInfo } from 'src/app/services/auth/google-api.service';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
 
 @Component({
   selector: 'app-home',
@@ -8,22 +9,26 @@ import { GoogleApiService, UserInfo } from 'src/app/services/auth/google-api.ser
 })
 export class HomeComponent implements OnInit {
 
-  userInfo?: UserInfo;
-  nomeUsuario: string = "OIEE";
+  public isLoggedIn = false;
+  public userProfile: KeycloakProfile | null = null;
 
-  constructor(private readonly googleApi: GoogleApiService) {
-    googleApi.userProfileSubject.subscribe( info => {
-      this.userInfo = info;
-      this.nomeUsuario = info.info.name;
-      console.log(info);
-    })
+  constructor(private readonly keycloak: KeycloakService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.isLoggedIn = await this.keycloak.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.userProfile = await this.keycloak.loadUserProfile();
+    }
   }
 
-  isLoggedIn(): boolean {
-    return this.googleApi.isLoggedIn()
+  public login() {
+    this.keycloak.login();
+  }
+
+  public logout() {
+    this.keycloak.logout();
   }
 
 }

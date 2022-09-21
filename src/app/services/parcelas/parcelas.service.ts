@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
 import { Parcela } from 'src/app/interfaces/Parcela';
 import { environment } from 'src/environments/environment';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class ParcelasService {
   private baseUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient, private readonly oAuthService: OAuthService) { }
+  constructor(private http: HttpClient, private readonly keycloak: KeycloakService) { }
 
   listarParcelas(contratoId: number): Observable<Parcela[]> {
     return this.http.get<Parcela[]>(`${this.baseUrl}api/Contratos/${contratoId}/parcelas`, { headers: this.authHeader() });
@@ -20,7 +20,7 @@ export class ParcelasService {
   private authHeader() : HttpHeaders {
     return new HttpHeaders ({
       //'Access-Control-Allow-Origin': 'http://localhost:4200',
-      //'Authorization': `Bearer ${this.oAuthService.getAccessToken()}`
+      'Authorization': `Bearer ${this.keycloak.getToken()}`
     })
   }
 }
