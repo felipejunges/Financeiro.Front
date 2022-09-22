@@ -36,9 +36,8 @@ export class MatriculaComponent implements OnInit {
 
   ngOnInit(): void {
     this.postagemForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [Validators.required]),
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       cpf: new FormControl('', [Validators.required, GenericValidators.isValidCpf()]),
       identidade: new FormControl('', [Validators.required]),
       dataNascimento: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/)]),
@@ -82,21 +81,11 @@ export class MatriculaComponent implements OnInit {
       return field.invalid && (field.dirty || field.touched);
   }
   
-  // obterValorCampo(campo: string): string {
-  //   return this.postagemForm.controls[campo].value;
-  // }
-
-  // get nome() {
-  //   return this.postagemForm.get('nome')!;
-  // }
-
   submit() {
     if (this.postagemForm.invalid)
       return;
 
     this.postagemForm.controls['cpf'].setErrors({ 'teste': true });
-
-    //console.log(this.postagemForm.value);
 
     this.service.incluir(this.postagemForm.value)
       .subscribe({

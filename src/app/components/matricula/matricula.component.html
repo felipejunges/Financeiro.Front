@@ -2,40 +2,6 @@
 
 <form class="g-3" (ngSubmit)="submit()" [formGroup]="postagemForm" #formDir="ngForm">
 
-  <fieldset>
-    <legend>Acesso</legend>
-    <div class="row">
-      <div class="col-md-4">
-        <label for="email" class="form-label">E-mail <span class="obrigatorio">*</span></label>
-        <div class="input-group">
-          <span class="input-group-text" id="basic-addon1">@</span>
-          <input type="text" class="form-control" [ngClass]="campoInvalido('email') ? 'is-invalid' : ''" aria-label="E-mail" aria-describedby="basic-addon1" id="email" formControlName="email">
-
-          <div *ngIf="campoInvalido('email')" class="invalid-feedback">
-            <div *ngIf="postagemForm.get('email')!.errors?.['required']">O e-mail é obrigatório</div>
-            <div *ngIf="postagemForm.get('email')!.errors?.['email']">
-              O e-mail deve ser informado corretamente
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="senha" class="form-label">Senha <span class="obrigatorio">*</span></label>
-        <input type="password" class="form-control" [ngClass]="campoInvalido('senha') ? 'is-invalid' : ''" aria-label="Senha" aria-describedby="basic-addon1" id="senha" formControlName="senha" />
-
-        <div *ngIf="campoInvalido('senha')" class="invalid-feedback">
-          <div *ngIf="postagemForm.get('senha')!.errors?.['required']">A senha é obrigatória</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 mt-2">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck" />
-        <label class="form-check-label" for="gridCheck"> Check me out </label>
-      </div>
-    </div>
-  </fieldset>
-
   <fieldset class="mt-4">
     <legend>Dados cadastrais</legend>
     <div class="row">
@@ -49,8 +15,8 @@
             O tamanho mínimo do campo é de 3 caracteres
           </div>
         </div>
-
       </div>
+
       <div class="col-md-2">
         <label for="cpf" class="form-label">CPF <span class="obrigatorio">*</span></label>
         <input type="text" class="form-control" mask="000.000.000-00" [dropSpecialCharacters]="false" [ngClass]="campoInvalido('cpf') ? 'is-invalid' : ''" id="cpf" formControlName="cpf" />
@@ -72,16 +38,28 @@
           <div *ngIf="postagemForm.get('identidade')!.errors?.['required']">A identidade é obrigatória</div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 offset-6">
+      <div class="col-md-2">
         <label for="dataNascimento" class="form-label">Data de nascimento <span class="obrigatorio">*</span></label>
         <input type="date" class="form-control" [ngClass]="campoInvalido('dataNascimento') ? 'is-invalid' : ''" id="dataNascimento" formControlName="dataNascimento" />
-
+        
         <div *ngIf="campoInvalido('dataNascimento')" class="invalid-feedback">
           <div *ngIf="postagemForm.get('dataNascimento')!.errors?.['required']">A data de nascimento é obrigatória</div>
           <div *ngIf="postagemForm.get('dataNascimento')!.errors?.['pattern']">
             A data de nascimento deve ser informada corretamente (dd/mm/aaaa)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="email" class="form-label">E-mail <span class="obrigatorio">*</span></label>
+        <input type="text" class="form-control" [ngClass]="campoInvalido('email') ? 'is-invalid' : ''" id="email" formControlName="email" />
+
+        <div *ngIf="campoInvalido('email')" class="invalid-feedback">
+          <div *ngIf="postagemForm.get('email')!.errors?.['required']">O e-mail é obrigatório</div>
+          <div *ngIf="postagemForm.get('email')!.errors?.['email']">
+            O e-mail deve ser informado corretamente
           </div>
         </div>
       </div>
