@@ -1,3 +1,15 @@
+<div class="row pb-4">
+  <div class="col-md-2">
+    <label for="contrato" class="form-label">Contrato</label>
+    <select id="contrato" class="form-select" id="contrato" #contrato (change)="listarParcelas(contrato.value)">
+      <option value="" disabled>Selecione</option>
+      <option [value]="contrato.id" *ngFor="let contrato of contratos">
+        {{ contrato.curso }}
+      </option>
+    </select>
+  </div>
+</div>
+
 <table class="table">
   <thead>
     <tr>
