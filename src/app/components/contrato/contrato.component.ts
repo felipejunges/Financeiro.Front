@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml, SafeUrl, SafeValue } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { MatriculaApiService } from 'src/app/services/matricula/matricula.api.service';
+import { ContratoApiService } from 'src/app/services/contratos/contrato-api.service';
 
 @Component({
   selector: 'app-contrato',
@@ -9,15 +10,40 @@ import { MatriculaApiService } from 'src/app/services/matricula/matricula.api.se
 })
 export class ContratoComponent implements OnInit {
 
-  constructor(private service: MatriculaApiService, private route: ActivatedRoute) { }
+  constructor(private service: ContratoApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
-  id: number = Number(this.route.snapshot.paramMap.get("id"));
-  teste: string = "teste";
+  termosAceitos: boolean = false;
+  erroTermo: boolean = false;
+  base64Pdf: string = "";
 
   ngOnInit(): void {
-    // this.service.obterContrato(this.id).subscribe((retorno: any) => {
-    //   this.teste = retorno;
-    // });
+
+    var contratoId: number = Number(this.route.snapshot.paramMap.get("id"));
+
+    this.service.obterTermosContrato(contratoId).subscribe((retorno: string) => {
+      this.base64Pdf = `data:application/pdf;base64,${retorno}`;
+    });
+  }
+
+  sanitize(valor: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(valor);
+  }
+
+  onCheckboxChange(e: any) {
+    this.termosAceitos = e.target.checked;
+  }
+
+  enviarContrato() {
+    this.erroTermo = false;
+
+    if (!this.termosAceitos) {
+      this.erroTermo = true;
+      return;
+    }
+
+    var contratoId: number = Number(this.route.snapshot.paramMap.get("id"));
+    
+    this.service.aceitarTermosContrato(contratoId).subscribe();
   }
 
 }

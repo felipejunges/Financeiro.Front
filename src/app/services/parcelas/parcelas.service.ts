@@ -16,7 +16,7 @@ export class ParcelasService {
   listarParcelas(contratoId: number): Observable<Parcela[]> {
     return this.http.get<Parcela[]>(`${this.baseUrl}api/Contratos/${contratoId}/parcelas`, { headers: this.authHeader() });
   }
-
+  
   private authHeader() : HttpHeaders {
     return new HttpHeaders ({
       //'Access-Control-Allow-Origin': 'http://localhost:4200',

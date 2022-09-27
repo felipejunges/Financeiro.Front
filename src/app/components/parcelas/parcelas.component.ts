@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contrato } from 'src/app/interfaces/Contrato';
 import { Parcela } from 'src/app/interfaces/Parcela';
-import { ContratoService } from 'src/app/services/contratos/contrato.service';
+import { ContratoApiService } from 'src/app/services/contratos/contrato-api.service';
 import { ParcelasService } from 'src/app/services/parcelas/parcelas.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class ParcelasComponent implements OnInit {
   contratos: Contrato[] = [];
   parcelas: Parcela[] = [];
 
-  constructor(private service: ParcelasService, private contratoService: ContratoService) { }
+  constructor(private service: ParcelasService, private contratoService: ContratoApiService) { }
 
   ngOnInit(): void {
     this.listarContratos();
