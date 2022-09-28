@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { ContratoInclusao } from 'src/app/interfaces/ContratoInclusao';
 
 import { MatriculaApiService } from 'src/app/services/matricula/matricula.api.service';
 import { GenericValidators } from 'src/app/validators/generic.validators';
@@ -32,7 +33,7 @@ export class MatriculaComponent implements OnInit {
 
   primeiroVencimento: string = this.calcularPrimeiroVencimento().toLocaleDateString();
 
-  constructor(private service: MatriculaApiService) { }
+  constructor(private service: MatriculaApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.postagemForm = new FormGroup({
@@ -85,13 +86,9 @@ export class MatriculaComponent implements OnInit {
     if (this.postagemForm.invalid)
       return;
 
-    this.postagemForm.controls['cpf'].setErrors({ 'teste': true });
-
     this.service.incluir(this.postagemForm.value)
-      .subscribe({
-        next: (v) => console.log(v),
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
+      .subscribe((contrato: ContratoInclusao) => {
+        this.router.navigate(['/contrato/:id', { id: contrato.id }]);
       });
   }
 }

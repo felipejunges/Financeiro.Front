@@ -1,4 +1,6 @@
-<p>imprimir-boleto works!</p>
-
-<embed [src]="url" width="100%" height="500" type="application/pdf">
+<div class="row">
+    <div class="col-md-12">
+        <iframe [src]="sanitize(base64Pdf)" width="100%" height="750"></iframe>
+    </div>
+</div>
 

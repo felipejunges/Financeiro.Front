@@ -10,11 +10,7 @@ export interface Matricula {
     dataNascimento: string,
     telefone: string,
 
-    endereco: Endereco
+    endereco: Endereco,
 
-    //public int CursoId { get; set; }
-
-    //public int NumeroParcelas { get; set; }
-
-    //public DateTime DataPrimeiroVencimento { get; set; }*/
+    numeroParcelas: number
 }

@@ -13,6 +13,10 @@ export class ParcelasService {
 
   constructor(private http: HttpClient, private readonly keycloak: KeycloakService) { }
 
+  obterBoleto(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}api/Parcelas/${id}/obter-boleto`, { responseType: 'text', headers: this.authHeader() });
+  }
+
   listarParcelas(contratoId: number): Observable<Parcela[]> {
     return this.http.get<Parcela[]>(`${this.baseUrl}api/Contratos/${contratoId}/parcelas`, { headers: this.authHeader() });
   }

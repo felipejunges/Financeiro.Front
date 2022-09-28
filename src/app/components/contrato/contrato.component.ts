@@ -17,7 +17,6 @@ export class ContratoComponent implements OnInit {
   base64Pdf: string = "";
 
   ngOnInit(): void {
-
     var contratoId: number = Number(this.route.snapshot.paramMap.get("id"));
 
     this.service.obterTermosContrato(contratoId).subscribe((retorno: string) => {
