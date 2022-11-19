@@ -1,27 +1,11 @@
-<p>home works!</p>
+<div style="padding-top: 30px;">
+  <h2>Grupo 7</h2>
 
-<h2>User information</h2>
-<table>
-  <tr *ngIf="userProfile?.username">
-    <th scope="row">Username</th>
-    <td>{{ userProfile?.username }}</td>
-  </tr>
-  <tr *ngIf="userProfile?.firstName">
-    <th scope="row">First name</th>
-    <td>{{ userProfile?.firstName }}</td>
-  </tr>
-  <tr *ngIf="userProfile?.lastName">
-    <th scope="row">Last name</th>
-    <td>{{ userProfile?.lastName }}</td>
-  </tr>
-  <tr *ngIf="userProfile?.email">
-    <th scope="row">E-mail</th>
-    <td>{{ userProfile?.email }}</td>
-  </tr>
-  <tr>
-    <th scope="row">E-mail verified</th>
-    <td>{{ userProfile?.emailVerified ? "Yes" : "No" }}</td>
-  </tr>
-</table>
+  <ul style="line-height: 30px; font-size: 18px; padding-top: 10px;">
+    <li>Airton Felipe Sauer de Oliveira</li>
+    <li>Andressa Magnus Friedrichs</li>
+    <li>Felipe Amadeu Junges</li>
+    <li>Marcelo Aloisio da Silva</li>
+  </ul>
+</div>
 
-<button (click)="logout()">Teste</button>

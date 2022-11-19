@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'financeiro-front';
 
-  constructor() {
+  constructor(private readonly keycloak: KeycloakService) {
+  }
+
+  // async isLoggedIn() {
+  //   await this.keycloak.isLoggedIn();
+  // }
+
+  logout() {
+    this.keycloak.logout();
   }
 }

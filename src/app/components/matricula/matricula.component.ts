@@ -79,7 +79,7 @@ export class MatriculaComponent implements OnInit {
     if (!field)
       return false;
 
-      return field.invalid && (field.dirty || field.touched);
+    return field.invalid && (field.dirty || field.touched);
   }
   
   submit() {
