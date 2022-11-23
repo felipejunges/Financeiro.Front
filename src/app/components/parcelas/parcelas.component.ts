@@ -30,6 +30,12 @@ export class ParcelasComponent implements OnInit {
     });
   }
 
+  gerarBoletoParcela(parcelaId: number) {
+    this.service.gerarBoletoParcela(parcelaId).subscribe(() => {
+      this.listarContratos();
+    });
+  }
+
   listarParcelas(contratoId: string) {
     this.service.listarParcelas(Number(contratoId)).subscribe((parcelas) => this.parcelas = parcelas);
   }

@@ -28,6 +28,8 @@
         <a routerLink="/parcelas/{{ parcela.id }}" *ngIf="parcela.temBoleto">
           <i class="bi bi-printer-fill"></i>
         </a>
+
+        <button class="btn" *ngIf="!parcela.temBoleto" (click)="gerarBoletoParcela(parcela.id)"><i class="bi bi-briefcase"></i></button>
       </td>
     </tr>
   </tbody>

@@ -9,12 +9,20 @@ import { KeycloakService } from 'keycloak-angular';
 export class AppComponent {
   title = 'financeiro-front';
 
+  isLoggedIn: boolean = false;
+
   constructor(private readonly keycloak: KeycloakService) {
   }
+  
+  ngOnInit(): void {
+    this.setIsLoggedIn();
+  }
 
-  // async isLoggedIn() {
-  //   await this.keycloak.isLoggedIn();
-  // }
+  async setIsLoggedIn() {
+    this.keycloak.isLoggedIn().then(l => {
+      this.isLoggedIn = l;
+    });
+  }
 
   logout() {
     this.keycloak.logout();

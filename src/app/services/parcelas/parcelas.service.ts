@@ -20,6 +20,10 @@ export class ParcelasService {
   listarParcelas(contratoId: number): Observable<Parcela[]> {
     return this.http.get<Parcela[]>(`${this.baseUrl}api/Contratos/${contratoId}/parcelas`, { headers: this.authHeader() });
   }
+
+  gerarBoletoParcela(parcelaId: number) {
+    return this.http.post(`${this.baseUrl}api/Parcelas/${parcelaId}/gerar-boleto?confirmaSobrescrever=true`, { headers: this.authHeader() });
+  }
   
   private authHeader() : HttpHeaders {
     return new HttpHeaders ({
