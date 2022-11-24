@@ -13,6 +13,7 @@ export class ParcelasComponent implements OnInit {
 
   contratos: Contrato[] = [];
   parcelas: Parcela[] = [];
+  contratoSelecionadoId: number = 0;
 
   constructor(private service: ParcelasService, private contratoService: ContratoApiService) { }
 
@@ -32,11 +33,16 @@ export class ParcelasComponent implements OnInit {
 
   gerarBoletoParcela(parcelaId: number) {
     this.service.gerarBoletoParcela(parcelaId).subscribe(() => {
-      this.listarContratos();
+      this.listarParcelasContratoSelecionado();
     });
   }
 
   listarParcelas(contratoId: string) {
-    this.service.listarParcelas(Number(contratoId)).subscribe((parcelas) => this.parcelas = parcelas);
+    this.contratoSelecionadoId = Number(contratoId);
+    this.listarParcelasContratoSelecionado();
+  }
+
+  listarParcelasContratoSelecionado(): void {
+    this.service.listarParcelas(this.contratoSelecionadoId).subscribe((parcelas) => this.parcelas = parcelas);
   }
 }

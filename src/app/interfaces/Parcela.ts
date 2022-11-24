@@ -4,4 +4,5 @@ export interface Parcela {
     valor: number,
     dataVencimento: Date,
     temBoleto: boolean
+    gerarBoleto: boolean
 }
