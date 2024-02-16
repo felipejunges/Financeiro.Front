@@ -26,7 +26,6 @@
           <div *ngIf="postagemForm.get('cpf')!.errors?.['cpfNotValid']">
             O CPF deve ser informado corretamente
           </div>
-          <div *ngIf="postagemForm.get('cpf')!.errors?.['teste']">Funcionou!!</div>
         </div>
       </div>
 
@@ -41,7 +40,7 @@
       <div class="col-md-2">
         <label for="dataNascimento" class="form-label">Data de nascimento <span class="obrigatorio">*</span></label>
         <input type="date" class="form-control" [ngClass]="campoInvalido('dataNascimento') ? 'is-invalid' : ''" id="dataNascimento" formControlName="dataNascimento" />
-        
+
         <div *ngIf="campoInvalido('dataNascimento')" class="invalid-feedback">
           <div *ngIf="postagemForm.get('dataNascimento')!.errors?.['required']">A data de nascimento é obrigatória</div>
           <div *ngIf="postagemForm.get('dataNascimento')!.errors?.['pattern']">

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
-import { KeycloakProfile } from 'keycloak-js';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,25 +9,12 @@ import { KeycloakProfile } from 'keycloak-js';
 export class HomeComponent implements OnInit {
 
   public isLoggedIn = false;
-  public userProfile: KeycloakProfile | null = null;
 
-  constructor(private readonly keycloak: KeycloakService) {
+  constructor(private readonly auth: AuthService) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.isLoggedIn = await this.keycloak.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      this.userProfile = await this.keycloak.loadUserProfile();
-    }
-  }
-
-  public login() {
-    this.keycloak.login();
-  }
-
-  public logout() {
-    this.keycloak.logout();
+    this.isLoggedIn = this.auth.isLoggedIn();
   }
 
 }
