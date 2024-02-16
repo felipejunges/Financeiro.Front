@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth/auth.service';
 import { Component } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +12,19 @@ export class AppComponent {
 
   isLoggedIn: boolean = false;
 
-  constructor(private readonly keycloak: KeycloakService) {
+  constructor(private readonly auth: AuthService, private router: Router) {
   }
-  
+
   ngOnInit(): void {
     this.setIsLoggedIn();
   }
 
   async setIsLoggedIn() {
-    this.keycloak.isLoggedIn().then(l => {
-      this.isLoggedIn = l;
-    });
+    this.isLoggedIn = this.auth.isLoggedIn();
   }
 
   logout() {
-    this.keycloak.logout();
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

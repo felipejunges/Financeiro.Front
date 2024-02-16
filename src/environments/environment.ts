@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiAuthBaseUrl: "http://localhost:5112/",
   apiBaseUrl: "http://localhost:5000/"
 };
 

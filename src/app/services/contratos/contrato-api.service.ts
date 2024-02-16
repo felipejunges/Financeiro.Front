@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 import { Contrato } from 'src/app/interfaces/Contrato';
 
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ContratoApiService {
   private baseUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient, private readonly keycloak: KeycloakService) { }
+  constructor(private http: HttpClient, private readonly auth: AuthService) { }
 
   listarContratos(): Observable<Contrato[]> {
     return this.http.get<Contrato[]>(`${this.baseUrl}api/Contratos`, { headers: this.authHeader() });
@@ -29,8 +29,7 @@ export class ContratoApiService {
 
   private authHeader() : HttpHeaders {
     return new HttpHeaders ({
-      //'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Authorization': `Bearer ${this.keycloak.getToken()}`
+      'Authorization': `Bearer ${this.auth.getToken()}`
     })
   }
 }
