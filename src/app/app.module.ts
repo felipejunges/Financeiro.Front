@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { ContratoComponent } from './components/contrato/contrato.component'
 
 import { ParcelasComponent } from './components/parcelas/parcelas.component';
 import { ImprimirBoletoComponent } from './components/imprimir-boleto/imprimir-boleto.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
@@ -35,7 +36,11 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     ReactiveFormsModule,
     NgxMaskModule.forRoot()
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

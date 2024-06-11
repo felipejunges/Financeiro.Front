@@ -6,7 +6,7 @@ import { ImprimirBoletoComponent } from './components/imprimir-boleto/imprimir-b
 import { LoginComponent } from './components/login/login.component';
 import { MatriculaComponent } from './components/matricula/matricula.component';
 import { ParcelasComponent } from './components/parcelas/parcelas.component';
-import { AuthGuard } from './guard/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
