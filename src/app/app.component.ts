@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +10,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'financeiro-front';
 
-  isLoggedIn: boolean = false;
+  isLoggedIn = this.auth.isLoggedIn();
 
   constructor(private readonly auth: AuthService, private router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.setIsLoggedIn();
-  }
-
-  async setIsLoggedIn() {
-    this.isLoggedIn = this.auth.isLoggedIn();
   }
 
   logout() {
