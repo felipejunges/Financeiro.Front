@@ -13,9 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" routerLink="/parcelas">Parcelas</a>
                 </li>
-                <ng-container *ngIf="isLoggedIn">
+                <ng-container *ngIf="isLoggedIn$ | async as usuario">
                     <li class="nav-item d-flex">
-                        <a class="nav-link text-dark" href="#" (click)="logout()">Logout</a>
+                        <a class="nav-link text-dark" href="#" (click)="logout()">Logout ({{usuario.given_name}})</a>
                     </li>
                 </ng-container>
               </ul>

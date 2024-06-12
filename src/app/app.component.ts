@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from './services/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent {
   title = 'financeiro-front';
 
-  isLoggedIn = this.auth.isLoggedIn();
+  isLoggedIn$ = this.userService.retornarUser();
 
-  constructor(private readonly auth: AuthService, private router: Router) {
+  constructor(private readonly userService: UserService, private router: Router) {
   }
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+    this.userService.logout();
+    this.router.navigate(['login']);
   }
 }
