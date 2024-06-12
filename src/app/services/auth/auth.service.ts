@@ -34,4 +34,25 @@ export class AuthService {
         })
       );
   }
+
+  refresh(token: string, refreshToken: string):Observable<boolean> {
+    return this.http.put<LoginResponse>(`${this.baseUrl}api/Auth`, { token, refreshToken })
+      .pipe(
+        map((response: LoginResponse) => {
+
+          if (!response.sucesso) {
+            return false;
+          }
+
+          this.tokenService.set(response.token, response.refreshToken);
+          this.userService.decodeJwt(response.token);
+
+          return true;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error during refreshToken:', error);
+          return throwError(() => new Error('test'));
+        })
+      );
+  }
 }

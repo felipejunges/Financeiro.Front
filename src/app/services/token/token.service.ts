@@ -10,10 +10,6 @@ export class TokenService {
 
   constructor() { }
 
-  isLoggedIn(): boolean {
-    return this.getToken() != null; // TODO: validar se o token está válido
-  }
-
   set(token: string, refreshToken: string) {
     localStorage.setItem(this.AUTH_TOKEN_KEY, token);
     localStorage.setItem(this.AUTH_REFRESH_TOKEN_KEY, refreshToken);
@@ -26,5 +22,9 @@ export class TokenService {
 
   getToken(): string | null {
     return localStorage.getItem(this.AUTH_TOKEN_KEY);
+  }
+
+  getTokenWithRefresh(): (string | null)[] {
+    return [localStorage.getItem(this.AUTH_TOKEN_KEY), localStorage.getItem(this.AUTH_REFRESH_TOKEN_KEY)];
   }
 }
