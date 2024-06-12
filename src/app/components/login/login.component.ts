@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      // Handle login logic here (e.g., call an authentication service)
       const email = this.loginForm.value.username;
       const senha = this.loginForm.value.password;
 
