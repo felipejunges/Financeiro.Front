@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
       const senha = this.loginForm.value.password;
 
       this.authService.login({ email, senha }).subscribe(r => {
-        console.log(`resultado: ${r}`);
         this.router.navigate(['/']);
       });
     }

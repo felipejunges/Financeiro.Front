@@ -35,6 +35,14 @@ export class UserService {
   }
 
   isLoggedIn(): boolean {
-    return this.tokenService.isLoggedIn();
+    return !!this.tokenService.getToken();
+  }
+
+  getToken(): string | null {
+    return this.tokenService.getToken();
+  }
+
+  getTokenWithRefresh(): (string | null)[] {
+    return this.tokenService.getTokenWithRefresh();
   }
 }
