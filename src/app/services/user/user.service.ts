@@ -42,7 +42,7 @@ export class UserService {
     return this.tokenService.getToken();
   }
 
-  getTokenWithRefresh(): (string | null)[] {
+  getTokenWithRefresh(): { token: string | null, refreshToken: string | null } {
     return this.tokenService.getTokenWithRefresh();
   }
 }

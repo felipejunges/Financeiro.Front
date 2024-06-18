@@ -24,7 +24,7 @@ export class TokenService {
     return localStorage.getItem(this.AUTH_TOKEN_KEY);
   }
 
-  getTokenWithRefresh(): (string | null)[] {
-    return [localStorage.getItem(this.AUTH_TOKEN_KEY), localStorage.getItem(this.AUTH_REFRESH_TOKEN_KEY)];
+  getTokenWithRefresh(): { token: string | null, refreshToken: string | null } {
+    return { token: localStorage.getItem(this.AUTH_TOKEN_KEY), refreshToken: localStorage.getItem(this.AUTH_REFRESH_TOKEN_KEY) };
   }
 }

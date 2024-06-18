@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, switchMap, throwError } from 'rxjs';
 import { LoginRequest } from 'src/app/interfaces/login/LoginRequest';
 import { LoginResponse } from 'src/app/interfaces/login/LoginResponse';
 import { environment } from 'src/environments/environment';
@@ -35,7 +35,7 @@ export class AuthService {
       );
   }
 
-  refresh(token: string, refreshToken: string):Observable<boolean> {
+  refresh(token: string, refreshToken: string): Observable<boolean> {
     return this.http.put<LoginResponse>(`${this.baseUrl}api/Auth`, { token, refreshToken })
       .pipe(
         map((response: LoginResponse) => {

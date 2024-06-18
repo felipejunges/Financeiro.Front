@@ -3,10 +3,9 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse
+  HttpInterceptor
 } from '@angular/common/http';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
 import { Router } from '@angular/router';
@@ -16,8 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private readonly userService: UserService,
-    private readonly authService: AuthService,
-    private router: Router
+    private readonly authService: AuthService
   ) { }
 
   requested = false;
@@ -35,43 +33,30 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next
       .handle(request)
-      .pipe(catchError(e => this.handleError(e)));
+      .pipe(catchError(e => this.handleError(e, request, next)));
   }
 
-  private handleError(err: HttpErrorResponse): Observable<any> {
+  handleError(err: any, request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (err && err.status == 401 && !this.requested) {
+      // If the error status is 401 Unauthorized, try refreshing the token
+      return this.refreshToken().pipe(
+        switchMap((success: boolean) => {
+          // Clone the original request and attach the new token to the header
+          const { token } = this.userService.getTokenWithRefresh();
 
-      // TODO: estudar Observables :)
-
-      this.refreshToken().subscribe({
-        next: (tokenRenewed: boolean) => {
-          if (tokenRenewed) {
-            this.requested = false;
-            return of('Token renewed')
-          }
-
-          return throwError(() => new Error('Impossível gerar novo token'));
-        },
-        error: (err: any) => {
-          this.userService.logout();
-          this.router.navigate(['/']);
-
-          return throwError(() => new Error('User token is invalid'));
-        }
-      });
-
-      return of('Of padrão');
-
-    } else {
-      this.requested = false;
-      return throwError(() => new Error('Erro não relacionado com Auth'));
+          const clonedRequest = request.clone({ setHeaders: { 'Authorization': `Bearer ${token}` } });
+          return next.handle(clonedRequest);
+        })
+      );
     }
+
+    return throwError(() => new Error('err'));
   }
 
   private refreshToken(): Observable<boolean> {
     this.requested = true;
 
-    const [token, refreshToken] = this.userService.getTokenWithRefresh();
+    const { token, refreshToken } = this.userService.getTokenWithRefresh();
 
     return this.authService.refresh(token!, refreshToken!); // TODO: valores podem ser nulos!
   }
